@@ -57,21 +57,21 @@
 <title><?= $judul; ?></title>
 <div class="login-box">
      <h2>ADMIN LOGIN</h2>
-     <form>
-          <div class="user-box">
-               <input type="text" name="email" required="">
-               <label>Email</label>
-          </div>
-          <div class="user-box">
-               <input type="password" name="password" required="">
-               <label>Password</label>
-          </div>
-          <a href="<?= base_url('admin/home') ?>">
-               <span></span>
-               <span></span>
-               <span></span>
-               <span></span>
-               Submit
-          </a>
-     </form>
+     <?= form_open('login'); ?>
+     <div class="user-box">
+          <input type="text" name="username" required="">
+          <label>Username</label>
+     </div>
+     <div class="user-box">
+          <input type="password_old" name="password_old" required="">
+          <label>Password</label>
+     </div>
+     <button>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+     </button>
+     <?= form_close(); ?>
 </div>
