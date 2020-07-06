@@ -44,4 +44,10 @@ class Auth extends CI_Controller
                redirect(base_url());
           }
      }
+
+     public function logout()
+     {
+          session_destroy();
+          redirect(base_url());
+     }
 }

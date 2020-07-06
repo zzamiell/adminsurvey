@@ -53,6 +53,7 @@
           }
      }
 </style>
+<link rel="icon" href="<?= base_url('assets/img/logo.bmp') ?>" type="image/gif/bmp">
 <link rel="stylesheet" href="<?= base_url('assets/css/loginlogin.css'); ?>">
 <title><?= $judul; ?></title>
 <div class="login-box">
@@ -63,7 +64,7 @@
           <label>Username</label>
      </div>
      <div class="user-box">
-          <input type="password_old" name="password_old" required="">
+          <input type="password" name="password_old" required="">
           <label>Password</label>
      </div>
      <button>

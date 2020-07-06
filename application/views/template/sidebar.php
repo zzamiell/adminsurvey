@@ -29,35 +29,35 @@
 
      <li class="nav-item">
           <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
-               <i class="fas fa-fw fa-user"></i>
+               <i class="fas fa-fw fa-users"></i>
                <span>Group Input</span>
           </a>
      </li>
 
      <li class="nav-item">
           <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
-               <i class="fas fa-fw fa-user"></i>
+               <i class="fas fa-fw fa-question-circle"></i>
                <span>Question Input</span>
           </a>
      </li>
 
      <li class="nav-item">
           <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
-               <i class="fas fa-fw fa-user"></i>
+               <i class="fas fa-fw fa-question"></i>
                <span>Question type Input</span>
           </a>
      </li>
 
      <li class="nav-item">
           <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
-               <i class="fas fa-fw fa-user"></i>
+               <i class="fas fa-fw fa-poll-h"></i>
                <span>Survey tittle android/ios</span>
           </a>
      </li>
 
      <li class="nav-item">
           <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
-               <i class="fas fa-fw fa-user"></i>
+               <i class="fas fa-fw fa-database"></i>
                <span>View raw data</span>
           </a>
      </li>
