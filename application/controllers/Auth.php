@@ -13,14 +13,18 @@ class Auth extends CI_Controller
      public function index()
      {
           $data['judul'] = 'Halaman Login - PT ARI';
+          $data['css'] = "login.css";
+          $data['js'] = "login.js";
+          $this->load->view('template/Authheader', $data);
           $this->load->view('index', $data);
+          $this->load->view('template/Authfooter', $data);
      }
 
      public function proses_login()
      {
           $data = array(
                'username' => $this->input->post('username'),
-               'password_old' => $this->input->post('password_old')
+               'password_old' => sha1($this->input->post('password_old'))
           );
 
           $cek  = $this->db->get_where('tb_user', $data)->num_rows();
