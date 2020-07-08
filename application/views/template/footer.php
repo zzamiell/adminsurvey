@@ -52,6 +52,25 @@
 <?php if (isset($costom_js)) { ?><script src="<?= base_url('assets/js/' . $costom_js); ?>"></script><?php } ?>
 
 <script>
+     let log_off = new Date();
+     log_off.setMinutes(log_off.getMinutes() + 15);
+     log_off = new Date(log_off);
+
+     let int_logoff = setInterval(function() {
+          let now = new Date();
+          if (now > log_off) {
+               window.location.assign("<?= base_url('auth/log_off') ?>");
+               clearInterval(int_logoff);
+          }
+     }, 5000);
+
+     $('body').on('click', function() {
+          log_off = new Date();
+          log_off.setMinutes(log_off.getMinutes() + 15);
+          log_off = new Date(log_off);
+          console.log(log_off);
+     })
+
      $(document).ready(function() {
           $('.myTable').DataTable();
      });

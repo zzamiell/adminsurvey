@@ -9,5 +9,8 @@ $route['login'] = 'auth/proses_login';
 $route['admin/(:any)'] = 'admin/handlemenu/$1';
 
 
+$route['tambahUser'] = 'user/add';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

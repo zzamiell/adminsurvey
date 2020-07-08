@@ -54,4 +54,22 @@ class Auth extends CI_Controller
           session_destroy();
           redirect(base_url());
      }
+
+     public function log_off()
+     {
+          $sess = array(
+               'id'           => $this->session->userdata('id'),
+               'username'     => $this->session->userdata('username'),
+               'password_old' => $this->session->userdata('password'),
+               'email'        => $this->session->userdata('email')
+          );
+          // $this->session->unset_userdata(array('id' => '', 'username' => '', 'password_old' => '', 'email' => ''));
+          // $this->session->unset_userdata('berhasil');
+          // print_r($sess);
+          // die;
+          $this->session->unset_userdata($sess);
+          $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+          Session telah berakhir, silahkan login kembali</div>');
+          redirect(base_url());
+     }
 }

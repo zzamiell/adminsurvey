@@ -21,9 +21,9 @@
 
      <!-- Nav Item - Kelola User -->
      <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
+          <a class="nav-link" href="<?= base_url('admin/kelola_user') ?>">
                <i class="fas fa-fw fa-user"></i>
-               <span>User Input</span>
+               <span>Kelola User</span>
           </a>
      </li>
 

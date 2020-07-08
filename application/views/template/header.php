@@ -11,6 +11,7 @@
 
      <title><?= $judul; ?></title>
 
+
      <!-- Custom fonts for this template-->
      <link rel="icon" href="<?= base_url('assets/img/logo.bmp') ?>" type="image/gif/bmp">
      <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
