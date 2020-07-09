@@ -31,7 +31,7 @@
                                    <td><?= $u->level; ?></td>
                                    <td>
                                         <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-pegawai<?= $u->id_user ?>" class="badge badge-info">Edit</a>
-                                        <a class="badge badge-danger text-white" href="<?= base_url('jenis/hapus/' . $u->id_user); ?>">Hapus</a>
+                                        <a class="badge badge-danger text-white" href="<?= base_url('hapusUser/' . $u->id_user) . '/' . $u->id_profile; ?>">Hapus</a>
                                    </td>
                               </tr>
 
@@ -41,15 +41,48 @@
                                    <div class="modal-dialog">
                                         <div class="modal-content">
                                              <div class="modal-header">
-                                                  <h4 class="modal-title">Edit Jenis</h4>
+                                                  <h4 class="modal-title">Edit User</h4>
                                                   <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                                              </div>
-                                             <?= form_open('editJenis/' . $u->id_user); ?>
+                                             <?= form_open('editUser/' . $u->id_user); ?>
                                              <div class="modal-body">
 
+                                                  <input type="hidden" name="id_profile" value="<?= $u->id_profile; ?>">
+
                                                   <div class="form-group">
-                                                       <input name="jenis" class="form-control" value="<?= $u->jenis; ?>" required>
+                                                       <input type="text" name="username" class="form-control" placeholder="Username User" value="<?= $u->username; ?>" required>
                                                   </div>
+
+                                                  <div class="form-group">
+                                                       <input type="email" name="email" class="form-control" placeholder="Email User" value="<?= $u->email; ?>" required>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                       <input type="text" name="first_name" class="form-control" placeholder="Nama Depan" value="<?= $u->first_name; ?>" required>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                       <input type="text" name="last_name" class="form-control" placeholder="Nama Belakang" value="<?= $u->last_name; ?>" required>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                       <input type="password" name="password_old" class="form-control" placeholder="Password User" value="<?= $u->password_old; ?>" required>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                       <label>Level</label>
+                                                       <select name="id_level" class="form-control">
+                                                            <?php foreach ($level as $kat) : ?>
+                                                                 <?php if ($kat->id_level === $u->id_level) :
+                                                                      $select = 'selected';
+                                                                 else :
+                                                                      $select = '';
+                                                                 endif; ?>
+                                                                 <option <?= $select; ?> value="<?= $kat->id_level; ?>"><?= $kat->level; ?></option>
+                                                            <?php endforeach; ?>
+                                                       </select>
+                                                  </div>
+
                                                   <div class="modal-footer">
                                                        <input class="btn btn-info" type="submit" value="Simpan"></input>
                                                        <button type="button" class="btn btn-warning" data-dismiss="modal"> Batal</button>
