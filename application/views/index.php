@@ -18,6 +18,7 @@
                                              <h1 class="text-gray-900 font-weight-bold mb-4"><?= $judul ?></h1>
 
                                         </div>
+                                        <!-- <p><?php echo ("{$_SESSION['id']}" . "<br />"); ?></p> -->
                                         <?= $this->session->flashdata('message'); ?>
                                         <?= form_open('login'); ?>
                                         <span class="txt1 p-b-11">

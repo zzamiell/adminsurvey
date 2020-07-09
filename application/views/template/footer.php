@@ -68,6 +68,7 @@
           log_off = new Date();
           log_off.setMinutes(log_off.getMinutes() + 30);
           log_off = new Date(log_off);
+
           console.log(log_off);
      })
 
