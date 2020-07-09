@@ -24,7 +24,7 @@ class User extends CI_Controller
           $detail = $this->db->insert('tb_profile', $profile);
           $insert = $this->db->insert('tb_user', $data);
 
-          if ($insert) {
+          if ($insert && $detail) {
                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                Berhasil menambah data user</div>');
                redirect('admin/kelola_user');

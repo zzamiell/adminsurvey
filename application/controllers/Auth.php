@@ -63,6 +63,7 @@ class Auth extends CI_Controller
           // $this->session->unset_userdata('berhasil');
           // print_r($sess);
           // die;
+          // $this->session->unset_userdata($sess);
           $this->session->unset_userdata($sess);
           $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
           Session telah berakhir, silahkan login kembali</div>');

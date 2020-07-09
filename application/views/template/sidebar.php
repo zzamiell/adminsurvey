@@ -28,7 +28,7 @@
      </li>
 
      <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('admin/kelola_bahan_baku') ?>">
+          <a class="nav-link" href="<?= base_url('admin/kelola_group') ?>">
                <i class="fas fa-fw fa-users"></i>
                <span>Group Input</span>
           </a>
