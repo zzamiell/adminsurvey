@@ -22,17 +22,17 @@
                                         <?= $this->session->flashdata('message'); ?>
                                         <?= form_open('login'); ?>
                                         <span class="txt1 p-b-11">
-                                             Username
+                                             Email
                                         </span>
                                         <div class="form-group">
-                                             <input type="text" class="form-control form-control-user <?php echo form_error('email') ? 'is-invalid' : '' ?>" name="username" placeholder="Masukkan Email Anda">
+                                             <input type="text" class="form-control form-control-user <?php echo form_error('email') ? 'is-invalid' : '' ?>" name="email" placeholder="Masukkan Email Anda">
                                              <?php echo form_error('email', '<div class="invalid-feedback">', '</div>'); ?>
                                         </div>
                                         <span class="txt1 p-b-11">
                                              Password
                                         </span>
                                         <div class="form-group" id="show_hide_password">
-                                             <input type="password" class="form-control form-control- <?php echo form_error('password_old') ? 'is-invalid' : '' ?>" id="password" value="<?= set_value('password_old'); ?>" name="password_old" placeholder="Masukkan Password Anda">
+                                             <input type="password" class="form-control form-control- <?php echo form_error('password') ? 'is-invalid' : '' ?>" id="password" value="<?= set_value('password'); ?>" name="password" placeholder="Masukkan Password Anda">
                                              <span id="mybutton"><i class="fas fa-eye-slash"></i></span>
                                              <?php echo form_error('password_old', '<div class="invalid-feedback">', '</div>'); ?>
                                         </div>

@@ -3,28 +3,18 @@ class User extends CI_Controller
 {
      public function add()
      {
-
-          $profile = $this->db->get('tb_user')->num_rows() + 1;
-
           $data = array(
-               'username'          => $this->input->post('username'),
+               'first_name'        => $this->input->post('first_name'),
+               'last_name'         => $this->input->post('last_name'),
                'email'             => $this->input->post('email'),
-               'password_old'      => sha1($this->input->post('password_old')),
+               'password'          => sha1($this->input->post('password')),
                'id_level'          => $this->input->post('id_level'),
-               'id_profile'        => $profile,
                'status'            => 1
           );
 
-          $profile = array(
-               'id_profile'        => $profile,
-               'first_name'        => $this->input->post('first_name'),
-               'last_name'         => $this->input->post('last_name'),
-          );
-
-          $detail = $this->db->insert('tb_profile', $profile);
           $insert = $this->db->insert('tb_user', $data);
 
-          if ($insert && $detail) {
+          if ($insert) {
                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                Berhasil menambah data user</div>');
                redirect('admin/kelola_user');
@@ -39,23 +29,16 @@ class User extends CI_Controller
      {
 
           $data = array(
-               'username'          => $this->input->post('username'),
+               'first_name'        => $this->input->post('first_name'),
+               'last_name'         => $this->input->post('last_name'),
                'email'             => $this->input->post('email'),
-               'password_old'      => sha1($this->input->post('password_old')),
+               'password'          => sha1($this->input->post('password')),
                'id_level'          => $this->input->post('id_level')
           );
 
-          $profile = array(
-               'first_name'        => $this->input->post('first_name'),
-               'last_name'         => $this->input->post('last_name'),
-          );
-
-          $idprofile = $this->input->post('id_profile');
-
-          $editProfile   = $this->M_User->editProfile($idprofile, $profile);
           $editUser      = $this->M_User->editUser($id, $data);
 
-          if ($editUser || $editProfile) {
+          if ($editUser) {
                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                Berhasil mengubah data user</div>');
                redirect('admin/kelola_user');
@@ -66,12 +49,11 @@ class User extends CI_Controller
           }
      }
 
-     public function hapus($id, $idprofile)
+     public function hapus($id)
      {
           $hapususer    = $this->M_User->hapusUser($id);
-          $hapusprofile = $this->M_User->hapusProfile($idprofile);
 
-          if ($hapususer && $hapusprofile) {
+          if ($hapususer) {
                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                Berhasil menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                <span aria-hidden="true">&times;</span>

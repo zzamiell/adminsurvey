@@ -19,8 +19,8 @@ class Auth extends CI_Controller
      public function proses_login()
      {
           $data = array(
-               'username' => $this->input->post('username'),
-               'password_old' => sha1($this->input->post('password_old'))
+               'email'         => $this->input->post('email'),
+               'password'      => sha1($this->input->post('password'))
           );
 
           $cek  = $this->db->get_where('tb_user', $data)->num_rows();
@@ -29,10 +29,9 @@ class Auth extends CI_Controller
           if ($cek > 0) {
                $level = 'admin';
                $sess = array(
-                    'id'    => $data->id_user,
-                    'username' => $data->username,
-                    'password_old' => $data->password,
-                    'email'    => $data->email
+                    'id'       => $data->id_user,
+                    'email'    => $data->email,
+                    'password' => $data->password
                );
                $this->session->set_userdata($sess);
                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">

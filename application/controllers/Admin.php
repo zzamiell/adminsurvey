@@ -23,8 +23,9 @@ class Admin extends CI_Controller
                $data['judul'] = 'Halaman ' . $judul;
 
                //kelola user
-               $data['user']   = $this->M_User->getUser()->result();
-               $data['level']  = $this->db->get('tb_level')->result();
+               $data['user']            = $this->M_User->getUser()->result();
+               $data['usercount']       = $this->M_User->getUser()->num_rows();
+               $data['level']           = $this->db->get('tb_level')->result();
 
                $this->load->view('template/header', $data);
                $this->load->view('template/sidebar', $data);

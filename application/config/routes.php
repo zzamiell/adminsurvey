@@ -17,7 +17,7 @@ $route['tambahUser'] = 'user/add';
 $route['editUser/(:any)'] = 'user/edit/$1';
 
 //Hapus
-$route['hapusUser/(:any)/(:any)'] = 'user/hapus/$1/$2';
+$route['hapusUser/(:any)'] = 'user/hapus/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

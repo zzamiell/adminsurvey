@@ -13,7 +13,6 @@
                          <thead>
                               <tr align="center">
                                    <th scope="col">No</th>
-                                   <th scope="col">Username</th>
                                    <th scope="col">Email</th>
                                    <th scope="col">Nama Lengkap</th>
                                    <th scope="col">Level</th>
@@ -25,7 +24,6 @@
                               <?php foreach ($user as $u) : ?>
                                    <tr align="center">
                                         <td><?= $no++ ?></td>
-                                        <td><?= $u->username; ?></td>
                                         <td><?= $u->email; ?></td>
                                         <td><?= $u->first_name . ' ' . $u->last_name; ?></td>
                                         <td>
@@ -37,7 +35,7 @@
                                         </td>
                                         <td>
                                              <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-pegawai<?= $u->id_user ?>" class="badge badge-info">Edit</a>
-                                             <a class="badge badge-danger text-white" href="<?= base_url('hapusUser/' . $u->id_user) . '/' . $u->id_profile; ?>">Hapus</a>
+                                             <a class="badge badge-danger text-white" href="<?= base_url('hapusUser/' . $u->id_user) ?>">Hapus</a>
                                         </td>
                                    </tr>
 
@@ -53,12 +51,6 @@
                                                   <?= form_open('editUser/' . $u->id_user); ?>
                                                   <div class="modal-body">
 
-                                                       <input type="hidden" name="id_profile" value="<?= $u->id_profile; ?>">
-
-                                                       <div class="form-group">
-                                                            <input type="text" name="username" class="form-control" placeholder="Username User" value="<?= $u->username; ?>" required>
-                                                       </div>
-
                                                        <div class="form-group">
                                                             <input type="email" name="email" class="form-control" placeholder="Email User" value="<?= $u->email; ?>" required>
                                                        </div>
@@ -72,7 +64,7 @@
                                                        </div>
 
                                                        <div class="form-group">
-                                                            <input type="password" name="password_old" class="form-control" placeholder="Password User" value="<?= $u->password_old; ?>" required>
+                                                            <input type="password" name="password_old" class="form-control" placeholder="Password User" value="<?= $u->password; ?>" required>
                                                        </div>
 
                                                        <div class="form-group">
@@ -123,10 +115,6 @@
                     <div class="modal-body">
 
                          <div class="form-group">
-                              <input type="text" name="username" class="form-control" placeholder="Username User" required>
-                         </div>
-
-                         <div class="form-group">
                               <input type="email" name="email" class="form-control" placeholder="Email User" required>
                          </div>
 
@@ -139,7 +127,7 @@
                          </div>
 
                          <div class="form-group">
-                              <input type="password" name="password_old" class="form-control" placeholder="Password User" required>
+                              <input type="password" name="password" class="form-control" placeholder="Password User" required>
                          </div>
 
                          <div class="form-group">
