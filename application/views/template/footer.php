@@ -49,11 +49,18 @@
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <script src="<?= base_url('assets/vendor/datatables/datatables.min.js'); ?>"></script>
+
+
+<!-- sweetalert -->
+<script src="<?= base_url('sweet/dist/sweetalert.js') ?>"></script>
+<script src="<?= base_url('sweet/dist/sweetalert.min.js') ?>"></script>
+<script src="<?= base_url('sweet/js/bootstrap.min.js') ?>"></script>
+
 <?php if (isset($costom_js)) { ?><script src="<?= base_url('assets/js/' . $costom_js); ?>"></script><?php } ?>
 
 <script>
      let log_off = new Date();
-     log_off.setMinutes(log_off.getMinutes() + 30);
+     log_off.setMinutes(log_off.setMinutes() + 30);
      log_off = new Date(log_off);
 
      let int_logoff = setInterval(function() {
@@ -66,7 +73,7 @@
 
      $('body').on('click', function() {
           log_off = new Date();
-          log_off.setMinutes(log_off.getMinutes() + 30);
+          log_off.setMinutes(log_off.setMinutes() + 30);
           log_off = new Date(log_off);
 
           console.log(log_off);
@@ -88,6 +95,7 @@
           uiLibrary: 'bootstrap'
      });
 </script>
+
 </body>
 
 </html>

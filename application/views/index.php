@@ -3,26 +3,32 @@
      <!-- Outer Row -->
      <div class="row justify-content-center">
           <div class="col-lg-6 my-5">
-               <div class="card o-hidden border-0 shadow-lg my-3">
+               <div class="card o-hidden border-0 shadow-lg my-2">
                     <div class="card-body p-2">
                          <!-- Nested Row within Card Body -->
                          <div class="row">
                               <div class="col-lg">
-                                   <div class="p-3">
+                                   <div class="p-2">
                                         <div class="text-center">
-                                             <img src="<?php echo base_url() ?>assets/img/logo.bmp" alt="logo" width="100%">
+                                             <img src="<?php echo base_url() ?>assets/img/logopng.png" class="pt-3" alt="logo">
+                                             <br>
+                                             <br>
                                         </div>
+                                        <hr class="sidebar-divider my-0">
+                                        <br>
+
                                         <div class="text-center">
-                                             <br>
-                                             <br>
-                                             <h1 class="text-gray-900 font-weight-bold mb-4"><?= $judul ?></h1>
+
+                                             <h1 class="text-gray-900 mb-4">
+                                                  <pre><?= 'LOGIN ADMIN CMS' ?></pre>
+                                             </h1>
 
                                         </div>
                                         <!-- <p><?php echo ("{$_SESSION['id']}" . "<br />"); ?></p> -->
                                         <?= $this->session->flashdata('message'); ?>
                                         <?= form_open('login'); ?>
                                         <span class="txt1 p-b-11">
-                                             Email
+                                             Email</>
                                         </span>
                                         <div class="form-group">
                                              <input type="text" class="form-control form-control-user <?php echo form_error('email') ? 'is-invalid' : '' ?>" name="email" placeholder="Masukkan Email Anda">
@@ -36,7 +42,7 @@
                                              <span id="mybutton"><i class="fas fa-eye-slash"></i></span>
                                              <?php echo form_error('password_old', '<div class="invalid-feedback">', '</div>'); ?>
                                         </div>
-                                        <button type="submit" class="btn btn-info btn-user btn-block">
+                                        <button type="submit" class="btn btn-success btn-user btn-block">
                                              Login
                                         </button>
                                         <?= form_close(); ?>

@@ -15,13 +15,9 @@ class User extends CI_Controller
           $insert = $this->db->insert('tb_user', $data);
 
           if ($insert) {
-               $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-               Berhasil menambah data user</div>');
-               redirect('admin/kelola_user');
+               echo json_encode(array('sukses' => true, 'msg' => 'User Berhasil Ditambahkan'));
           } else {
-               $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-               Terjadi kesalahan! gagal menambah data user</div>');
-               redirect('admin/kelola_user');
+               echo json_encode(array('sukses' => false, 'msg' => 'Gagal Menambah User'));
           }
      }
 
@@ -51,20 +47,21 @@ class User extends CI_Controller
 
      public function hapus($id)
      {
+          $id = $this->input->post('id');
           $hapususer    = $this->M_User->hapusUser($id);
 
-          if ($hapususer) {
-               $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-               Berhasil menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button></div>');
-               redirect('admin/kelola_user');
-          } else {
-               $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-               Terjadi kesalahan! gagal menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button></div>');
-               redirect('admin/kelola_user');
-          }
+          // if ($hapususer) {
+          //      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          //      Berhasil menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          //      <span aria-hidden="true">&times;</span>
+          //    </button></div>');
+          //      redirect('admin/kelola_user');
+          // } else {
+          //      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          //      Terjadi kesalahan! gagal menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          //      <span aria-hidden="true">&times;</span>
+          //      </button></div>');
+          //      redirect('admin/kelola_user');
+          // }
      }
 }

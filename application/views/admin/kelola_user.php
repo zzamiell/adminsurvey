@@ -22,20 +22,21 @@
                          <tbody>
                               <?php $no = 1; ?>
                               <?php foreach ($user as $u) : ?>
-                                   <tr align="center">
+                                   <tr align="center" id="delete<?= $u->id_user; ?>">
                                         <td><?= $no++ ?></td>
                                         <td><?= $u->email; ?></td>
                                         <td><?= $u->first_name . ' ' . $u->last_name; ?></td>
                                         <td>
                                              <?php if ($u->level == 'User') : ?>
-                                                  <i class="fas fa-fw fa-user">User</i>
+                                                  <i class=" fas fa-fw fa-user">User</i>
                                              <?php else : ?>
                                                   <i class="fas fa-fw fa-user-lock">Admin</i>
                                              <?php endif; ?>
                                         </td>
                                         <td>
                                              <a href="javascript:void(0);" data-toggle="modal" data-target="#edit-pegawai<?= $u->id_user ?>" class="badge badge-info">Edit</a>
-                                             <a class="badge badge-danger text-white" href="<?= base_url('hapusUser/' . $u->id_user) ?>">Hapus</a>
+                                             <!-- <a class="badge badge-danger text-white" href="<?= base_url('hapusUser/' . $u->id_user) ?>">Hapus</a> -->
+                                             <a href="javascript:void(0);" onclick=deletedata(<?= $u->id_user ?>) class="badge badge-danger text-white">Hapus</a>
                                         </td>
                                    </tr>
 
@@ -111,42 +112,112 @@
                          </button>
                     </div>
 
-                    <?= form_open('tambahUser'); ?>
-                    <div class="modal-body">
+                    <form method="post" id="form-tambah_user" action="<?= base_url('tambahUser') ?>">
+                         <div class="modal-body">
 
-                         <div class="form-group">
-                              <input type="email" name="email" class="form-control" placeholder="Email User" required>
+                              <div class="form-group">
+                                   <input type="email" name="email" class="form-control" placeholder="Email User" required>
+                              </div>
+
+                              <div class="form-group">
+                                   <input type="text" name="first_name" class="form-control" placeholder="Nama Depan" required>
+                              </div>
+
+                              <div class="form-group">
+                                   <input type="text" name="last_name" class="form-control" placeholder="Nama Belakang" required>
+                              </div>
+
+                              <div class="form-group">
+                                   <input type="password" name="password" class="form-control" placeholder="Password User" required>
+                              </div>
+
+                              <div class="form-group">
+                                   <select name="id_level" class="form-control" required>
+                                        <option hidden>Pilih Level User</option>
+                                        <?php foreach ($level as $bg) : ?>
+                                             <option value="<?= $bg->id_level; ?>"><?= $bg->level; ?></option>
+                                        <?php endforeach; ?>
+                                   </select>
+                              </div>
+
                          </div>
-
-                         <div class="form-group">
-                              <input type="text" name="first_name" class="form-control" placeholder="Nama Depan" required>
+                         <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Add</button>
                          </div>
-
-                         <div class="form-group">
-                              <input type="text" name="last_name" class="form-control" placeholder="Nama Belakang" required>
-                         </div>
-
-                         <div class="form-group">
-                              <input type="password" name="password" class="form-control" placeholder="Password User" required>
-                         </div>
-
-                         <div class="form-group">
-                              <select name="id_level" class="form-control" required>
-                                   <option hidden>Pilih Level User</option>
-                                   <?php foreach ($level as $bg) : ?>
-                                        <option value="<?= $bg->id_level; ?>"><?= $bg->level; ?></option>
-                                   <?php endforeach; ?>
-                              </select>
-                         </div>
-
-                    </div>
-                    <div class="modal-footer">
-                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                         <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                    <?= form_close(); ?>
+                    </form>
                </div>
           </div>
      </div>
 </div>
 <!-- End of Main Content -->
+
+<script type="text/javascript">
+     $(document).ready(function() {
+
+          $('#form-tambah_user').submit(function(e) {
+               e.preventDefault();
+               var data = $('#form-tambah_user').serialize();
+               //console.log(data);
+               $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(data) {
+                         if (data.sukses == true) {
+                              swal({
+                                   title: 'Data user',
+                                   text: data.msg,
+                                   type: 'success'
+                              }, function() {
+                                   window.location.href = '<?php echo site_url('admin/kelola_user'); ?>';
+                              });
+                         } else {
+                              swal({
+                                   title: 'Data user',
+                                   text: data.msg,
+                                   type: 'warning'
+                              });
+                         }
+                    }
+               })
+          });
+     });
+</script>
+
+<script>
+     function deletedata(id) {
+          swal({
+                    title: "Apa anda yakin?",
+                    text: "User yang sudah dihapus, tidak dapat dikembalikan!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ya, Saya yakin!",
+                    closeOnConfirm: false
+               },
+               function(isConfirm) {
+                    if (isConfirm) {
+                         $.ajax({
+                              url: "<?php echo base_url('user/hapus/' . $u->id_user) ?>",
+                              type: "post",
+                              data: {
+                                   id: id,
+                              },
+                              success: function(data) {
+                                   console.log(data);
+                                   swal('User Berhasil Dihapus', ' ', 'success');
+                                   $("#delete" + id).fadeTo("slow", 0.7, function() {
+                                        $(this).remove();
+                                   })
+
+                              },
+                              error: function() {
+                                   swal('data gagal di hapus', 'error');
+                              }
+                         });
+                    }
+               });
+     }
+</script>
