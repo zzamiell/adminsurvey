@@ -38,7 +38,7 @@
                                              Password
                                         </span>
                                         <div class="form-group" id="show_hide_password">
-                                             <input type="password" class="form-control form-control- <?php echo form_error('password') ? 'is-invalid' : '' ?>" id="password" value="<?= set_value('password'); ?>" name="password" placeholder="Masukkan Password Anda">
+                                             <input type="password" class="form-control form-control- <?php echo form_error('password') ? 'is-invalid' : '' ?>" name="password" value="<?= set_value('password'); ?>" id="password" placeholder="Masukkan Password Anda">
                                              <span id="mybutton"><i class="fas fa-eye-slash"></i></span>
                                              <?php echo form_error('password_old', '<div class="invalid-feedback">', '</div>'); ?>
                                         </div>

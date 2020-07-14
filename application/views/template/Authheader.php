@@ -17,6 +17,13 @@
 
      <!-- Custom styles for this template-->
      <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+
+     <!-- sweetalert -->
+     <link rel="stylesheet" type="text/css" href="<?= base_url('sweet/dist/sweetalert.css') ?>">
+
+     <!-- ajax -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
      <?php if (isset($css)) echo '<link href="' . base_url('assets/css/' . $css) . '" rel="stylesheet">'; ?>
 
 </head>

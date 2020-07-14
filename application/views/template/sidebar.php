@@ -71,7 +71,7 @@
 
      <!-- Nav Item - Logout -->
      <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('auth/logout') ?>">
+          <a class="nav-link" href="<?= base_url('auth/logout') ?>" onclick="return confirm('Apakah anda yakin ingin keluar ?')">
                <i class="fas fa-fw fa-window-close"></i>
                <span>Logout</span></a>
      </li>

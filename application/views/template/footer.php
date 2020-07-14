@@ -60,7 +60,7 @@
 
 <script>
      let log_off = new Date();
-     log_off.setMinutes(log_off.setMinutes() + 30);
+     log_off.setMinutes(log_off.getMinutes() + 30);
      log_off = new Date(log_off);
 
      let int_logoff = setInterval(function() {
@@ -73,7 +73,7 @@
 
      $('body').on('click', function() {
           log_off = new Date();
-          log_off.setMinutes(log_off.setMinutes() + 30);
+          log_off.setMinutes(log_off.getMinutes() + 30);
           log_off = new Date(log_off);
 
           console.log(log_off);
@@ -94,6 +94,16 @@
      $('#datepicker2').datepicker({
           uiLibrary: 'bootstrap'
      });
+</script>
+
+<script type="text/javascript">
+     <?php if ($this->session->flashdata('login')) : ?>
+          swal("", "Berhasil Login", "success");
+     <?php endif; ?>
+
+     <?php if ($this->session->flashdata('gagal')) : ?>
+          swal("", "Maaf username/password salah", "error");
+     <?php endif; ?>
 </script>
 
 </body>

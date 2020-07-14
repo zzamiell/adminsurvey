@@ -34,11 +34,11 @@ class Auth extends CI_Controller
                     'password' => $data->password
                );
                $this->session->set_userdata($sess);
-               $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+               $this->session->set_flashdata('login', '<div class="alert alert-success" role="alert">
                Berhasil login</div>');
                redirect('admin/home');
           } else {
-               $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+               $this->session->set_flashdata('gagal', '<div class="alert alert-danger" role="alert">
                Maaf username/password salah</div>');
                redirect(base_url());
           }

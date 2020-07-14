@@ -35,13 +35,9 @@ class User extends CI_Controller
           $editUser      = $this->M_User->editUser($id, $data);
 
           if ($editUser) {
-               $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-               Berhasil mengubah data user</div>');
-               redirect('admin/kelola_user');
+               echo json_encode(array('sukses' => true, 'msg' => 'User Berhasil Diubah'));
           } else {
-               $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-               Terjadi kesalahan! gagal mengubah data user</div>');
-               redirect('admin/kelola_user');
+               echo json_encode(array('sukses' => false, 'msg' => 'Gagal Mengubah User'));
           }
      }
 
@@ -49,19 +45,5 @@ class User extends CI_Controller
      {
           $id = $this->input->post('id');
           $hapususer    = $this->M_User->hapusUser($id);
-
-          // if ($hapususer) {
-          //      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-          //      Berhasil menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          //      <span aria-hidden="true">&times;</span>
-          //    </button></div>');
-          //      redirect('admin/kelola_user');
-          // } else {
-          //      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-          //      Terjadi kesalahan! gagal menghapus data user<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          //      <span aria-hidden="true">&times;</span>
-          //      </button></div>');
-          //      redirect('admin/kelola_user');
-          // }
      }
 }
