@@ -68,7 +68,7 @@
      <div class="modal-dialog" role="document">
           <div class="modal-content">
                <div class="modal-header">
-                    <h5 class="modal-title" id="NewMenuModalLabel">Reset Password</h5>
+                    <h5 class="modal-title w-100 text-center" id="NewMenuModalLabel"><strong>Reset Password</strong></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                          <span aria-hidden="true">&times;</span>
                     </button>
@@ -80,6 +80,10 @@
                          <div class="form-group">
                               <label for="text">Masukkan Email Anda : </label>
                               <input type="email" name="email" class="form-control" placeholder="Masukkan Email Valid">
+                         </div>
+
+                         <div class="alert alert-danger">
+                              <strong>Perhatian!</strong> harap masukkan email yang anda daftarkan
                          </div>
 
                     </div>
