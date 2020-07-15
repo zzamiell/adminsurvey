@@ -42,12 +42,12 @@
                                              <span id="mybutton"><i class="fas fa-eye-slash"></i></span>
                                              <?php echo form_error('password_old', '<div class="invalid-feedback">', '</div>'); ?>
                                         </div>
-                                        <button type="submit" class="btn btn-success btn-user btn-block">
+                                        <button type="submit" class="btn btn-success btn-user btn-block mb-2">
                                              Login
                                         </button>
                                         <hr class="sidebar-divider d-none d-md-block">
                                         <?= form_close(); ?>
-                                        <button href="javascript:void(0);" data-toggle="modal" data-target="#NewMenuModal" class="btn btn-warning btn-user btn-block text-dark">
+                                        <button href="javascript:void(0);" data-toggle="modal" data-target="#NewMenuModal" class="btn btn-warning btn-user btn-block text-dark mt-2">
                                              Lupa Password ?
                                         </button>
                                    </div>
