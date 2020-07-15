@@ -20,6 +20,14 @@
      <?php if ($this->session->flashdata('gagal')) : ?>
           swal("", "Maaf username/password salah", "error");
      <?php endif; ?>
+
+     <?php if ($this->session->flashdata('logout')) : ?>
+          swal("", "Berhasil Logout", "success");
+     <?php endif; ?>
+
+     <?php if ($this->session->flashdata('emailok')) : ?>
+          swal("", "Silahkan cek email anda untuk reset password", "success");
+     <?php endif; ?>
 </script>
 
 </html>

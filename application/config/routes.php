@@ -8,6 +8,9 @@ $route['default_controller'] = 'auth';
 $route['login'] = 'auth/proses_login';
 $route['admin/(:any)'] = 'admin/handlemenu/$1';
 
+//kirimEmail
+$route['kirimEmail'] = 'auth/sendEmail';
+
 
 //Tambah
 $route['tambahUser'] = 'user/add';

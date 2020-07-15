@@ -101,8 +101,12 @@
           swal("", "Berhasil Login", "success");
      <?php endif; ?>
 
-     <?php if ($this->session->flashdata('gagal')) : ?>
-          swal("", "Maaf username/password salah", "error");
+     <?php if ($this->session->flashdata('emailberhasil')) : ?>
+          swal("", "Cek email anda untuk melakukan reset password", "success");
+     <?php endif; ?>
+
+     <?php if ($this->session->flashdata('emailgagal')) : ?>
+          swal("", "Cek email anda untuk melakukan reset password", "success");
      <?php endif; ?>
 </script>
 
