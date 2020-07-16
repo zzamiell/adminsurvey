@@ -28,7 +28,8 @@
                                         <?= $this->session->flashdata('message'); ?>
                                         <?= form_open('login'); ?>
                                         <span class="txt1 p-b-11">
-                                             Email</>
+                                             Email
+                                             </>
                                         </span>
                                         <div class="form-group">
                                              <input type="text" class="form-control form-control-user <?php echo form_error('email') ? 'is-invalid' : '' ?>" name="email" placeholder="Masukkan Email Anda">
@@ -67,16 +68,18 @@
 <div class="modal fade" id="NewMenuModal" tabindex="-1" role="dialog" aria-labelledby="NewMenuModalLabel" aria-hidden="true">
      <div class="modal-dialog" role="document">
           <div class="modal-content">
-               <div class="modal-header">
-                    <h5 class="modal-title w-100 text-center" id="NewMenuModalLabel"><strong>Reset Password</strong></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                    </button>
-               </div>
+               <!-- <div class="modal-header"> -->
+               <!-- <h5 class="modal-title w-100 text-center" id="NewMenuModalLabel"><strong>Reset Password</strong></h5> -->
+               <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+               </button>
+               <!-- </div> -->
 
-               <form method="post" action="<?= base_url('email/sendEmail') ?>">
+               <form method="post" action="<?= base_url('email/kirimEmail') ?>">
                     <div class="modal-body">
-
+                         <h2><i class="fa fa-lock fa-4x w-100 text-center"></i></h2>
+                         <h5 class="modal-title w-100 text-center" id="NewMenuModalLabel"><strong>Reset Password</strong></h5>
+                         <br>
                          <div class="form-group">
                               <label for="text">Masukkan Email Anda : </label>
                               <input type="email" name="email" class="form-control" placeholder="Masukkan Email Valid">
@@ -96,6 +99,13 @@
 </div>
 </div>
 <!-- End of Main Content -->
+
+
+<style>
+     .form-gap {
+          padding-top: 70px;
+     }
+</style>
 
 <script type="text/javascript">
      $(document).ready(function() {

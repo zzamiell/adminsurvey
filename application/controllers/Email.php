@@ -1,7 +1,90 @@
 <?php
 class Email extends CI_Controller
 {
-     public function sendEmail()
+
+     public function kirimEmail()
+     {
+          $email  = $this->input->post('email');
+
+          $cek    = $this->db->get_where('tb_user', array('email' => $email))->num_rows();
+          $data   = $this->db->get_where('tb_user', array('email' => $email))->row();
+
+          $nama   = $data->first_name . ' ' . $data->last_name;
+          $tanggal                      = time();
+          $tanggalv2                    = (int) ($tanggal / 10);
+          $token                        = md5($tanggalv2 . $data->id_user);
+
+          $userToken = array(
+               'token'   => $token
+          );
+
+          if ($cek > 0) {
+               $this->M_Email->updateToken($userToken, $data->email);
+               $newtoken   = $this->db->get_where('tb_user', array('token' => $token))->row();
+               $url = site_url() . 'email/resetPassword/' . $newtoken->token;
+               $link = '<a href="' . $url . '">' . $url . '</a>';
+               // print_r($link);
+               $this->sendEmail($data->email, $nama, $link);
+          } else {
+               $this->session->set_flashdata('noemail', '<div class="alert alert-danger" role="alert">
+               Maaf username/password salah</div>');
+               redirect(base_url());
+          }
+     }
+
+     public function resetPassword($token)
+     {
+          $cek     = $this->db->get_where('tb_user', array('token' => $token))->num_rows();
+          $hasil   = $this->db->get_where('tb_user', array('token' => $token))->row();
+
+          $data['token'] = $hasil->token;
+
+          // print_r($data);
+          // die;
+
+          if ($cek > 0) {
+               // $this->load->view('template/Authheader', $data);
+               $this->load->view('updatepassword', $data);
+               $this->load->view('template/Authfooter');
+          } else {
+               $this->session->set_flashdata('notoken', '<div class="alert alert-danger" role="alert">
+               Maaf username/password salah</div>');
+               redirect(base_url());
+          }
+     }
+
+     public function updatePassword($token)
+     {
+          $password1 = $this->input->post('password1');
+          $password2 = $this->input->post('password2');
+
+          if ($password1 !== $password2) {
+               $this->session->set_flashdata('passnomatch', '<div class="alert alert-danger" role="alert">
+               Maaf username/password salah</div>');
+               echo "<script type='text/javascript'>
+               history.back(self);
+               </script>";
+          } else {
+               $data = array(
+                    'password'        => sha1($password1)
+               );
+
+               $hapustoken = array(
+                    'token'   => ''
+               );
+
+               $editToken      = $this->M_Email->updatePassword($token, $data);
+
+               if ($editToken) {
+                    $deletetoken  = $this->M_Email->hapusToken($token, $hapustoken);
+                    echo json_encode(array('sukses' => true, 'msg' => 'Berhasil merubah password'));
+               } else {
+                    echo json_encode(array('sukses' => false, 'msg' => 'Gagal merubah password'));
+               }
+          }
+     }
+
+     public function sendEmail($email, $nama, $link)
      {
 
           $config['protocol']    = 'mail';
@@ -18,9 +101,10 @@ class Email extends CI_Controller
           $this->load->library('email');
           $this->email->initialize($config);
           $this->email->from('info@asiaresearchinstitute.com', 'Asia Research Institute');
-          $this->email->to('anugrahabdikautsar@gmail.com');
-          $this->email->subject('dayduy');
-          $this->email->message('isiaja');
+          $this->email->to($email);
+          $this->email->subject('Reset Password - ' . $nama);
+          $this->email->message('<strong>Hai, anda menerima email ini karena ada permintaan untuk memperbaharui  
+          password anda.</strong><br><strong>Silakan klik link ini:</strong> ' . $link);
           $this->email->set_newline("\r\n");
 
           $result = $this->email->send();

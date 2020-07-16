@@ -28,6 +28,18 @@
      <?php if ($this->session->flashdata('emailok')) : ?>
           swal("", "Silahkan cek email anda untuk reset password", "success");
      <?php endif; ?>
+
+     <?php if ($this->session->flashdata('emailnotok')) : ?>
+          swal("", "Terjadi kesalahan sistem, silahkan coba lagi", "success");
+     <?php endif; ?>
+
+     <?php if ($this->session->flashdata('noemail')) : ?>
+          swal("", "Ops, email tidak diketahui, silahkan input email yang sudah didaftarkan", "error");
+     <?php endif; ?>
+
+     <?php if ($this->session->flashdata('notoken')) : ?>
+          swal("", "Ops, Token tidak valid, mohon ikuti prosedur dengan benar", "error");
+     <?php endif; ?>
 </script>
 
 </html>

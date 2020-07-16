@@ -60,35 +60,4 @@ class Auth extends CI_Controller
           Session telah berakhir, silahkan login kembali</div>');
           redirect(base_url());
      }
-
-     public function sendEmail()
-     {
-
-          $config['protocol']    = 'mail';
-          $config['smtp_host']    = 'ssl://asiaresearchinstitute.com';
-          $config['smtp_port']    = '465';
-          $config['smtp_timeout'] = '400';
-          $config['smtp_user']    = 'smtp@asiaresearchinstitute.com';
-          $config['smtp_pass']    = '(WO6fz)t##;]';
-          $config['charset']    = 'utf-8';
-          $config['newline']    = "\r\n";
-          $config['mailtype'] = 'html';
-          $config['validation'] = FALSE;
-
-          $this->load->library('email');
-          $this->email->initialize($config);
-          $this->email->from('info@asiaresearchinstitute.com', 'Asia Research Institute');
-          $this->email->to('anugrahabdikautsar@gmail.com');
-          $this->email->subject('dayduy');
-          $this->email->message('isiaja');
-          $this->email->set_newline("\r\n");
-
-          $result = $this->email->send();
-          if ($result) {
-               echo json_encode(array('sukses' => true, 'msg' => 'Silahkan cek email anda untuk melakukan reset password'));
-          } else {
-               echo json_encode(array('failed' => false, 'msg' => 'Gagal Menambah User'));
-               // redirect(base_url('guest/service'));    
-          };
-     }
 }
