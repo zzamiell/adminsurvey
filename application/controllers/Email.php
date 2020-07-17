@@ -1,6 +1,12 @@
 <?php
 class Email extends CI_Controller
 {
+     public function __construct()
+     {
+          parent::__construct();
+          $this->load->helper('url');
+          $this->load->library('encrypt');
+     }
 
      public function kirimEmail()
      {
@@ -9,7 +15,7 @@ class Email extends CI_Controller
           $cek    = $this->db->get_where('tb_user', array('email' => $email))->num_rows();
           $data   = $this->db->get_where('tb_user', array('email' => $email))->row();
 
-          $nama   = $data->first_name . ' ' . $data->last_name;
+          $nama['nama']   = $data->first_name . ' ' . $data->last_name;
           $tanggal                      = time();
           $tanggalv2                    = (int) ($tanggal / 10);
           $token                        = md5($tanggalv2 . $data->id_user);
@@ -21,10 +27,11 @@ class Email extends CI_Controller
           if ($cek > 0) {
                $this->M_Email->updateToken($userToken, $data->email);
                $newtoken   = $this->db->get_where('tb_user', array('token' => $token))->row();
-               $url = site_url() . 'email/resetPassword/' . $newtoken->token;
+               $url['url'] = site_url() . 'email/resetPassword/' . $newtoken->token;
                $link = '<a href="' . $url . '">' . $url . '</a>';
+               $tokenfresh['tokenfresh'] = $newtoken->token;
                // print_r($link);
-               $this->sendEmail($data->email, $nama, $link);
+               $this->sendEmail($data->email, $nama, $url, $tokenfresh);
           } else {
                $this->session->set_flashdata('noemail', '<div class="alert alert-danger" role="alert">
                Maaf username/password salah</div>');
@@ -34,8 +41,8 @@ class Email extends CI_Controller
 
      public function resetPassword($token)
      {
-          $cek     = $this->db->get_where('tb_user', array('token' => $token))->num_rows();
-          $hasil   = $this->db->get_where('tb_user', array('token' => $token))->row();
+          $cek     = $this->db->get_where('tb_user', array('token' => decrypt_url($token)))->num_rows();
+          $hasil   = $this->db->get_where('tb_user', array('token' => decrypt_url($token)))->row();
 
           $data['token'] = $hasil->token;
 
@@ -84,7 +91,7 @@ class Email extends CI_Controller
           }
      }
 
-     public function sendEmail($email, $nama, $link)
+     public function sendEmail($email, $nama, $url, $tokenfresh)
      {
 
           $config['protocol']    = 'mail';
@@ -102,9 +109,8 @@ class Email extends CI_Controller
           $this->email->initialize($config);
           $this->email->from('info@asiaresearchinstitute.com', 'Asia Research Institute');
           $this->email->to($email);
-          $this->email->subject('Reset Password - ' . $nama);
-          $this->email->message('<strong>Hai, anda menerima email ini karena ada permintaan untuk memperbaharui  
-          password anda.</strong><br><strong>Silakan klik link ini:</strong> ' . $link);
+          $this->email->subject('Reset password');
+          $this->email->message($this->load->view('email', $url + $nama + $tokenfresh, true));
           $this->email->set_newline("\r\n");
 
           $result = $this->email->send();
